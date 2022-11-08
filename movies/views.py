@@ -54,7 +54,7 @@ class Watchlist(ListAPIView):
     def get_serializer_class(self):
         if self.request.user.is_authenticated:
            return Watchlist.objects.filter(user=self.request.user)
-       
+           
         # return  serializers.MoviesSerializer
 
 class addingwatchlist(CreateAPIView):

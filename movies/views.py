@@ -34,7 +34,6 @@ class Watchlist(ListAPIView):
            return Watchlist.objects.filter(user=self.request.user)
        
         return  serializers.MoviesSerializer
-
 class addingwatchlist(CreateAPIView):
      serializer_class = UpdatewatchlistSerializer
      lookup_field = 'id'

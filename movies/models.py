@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Movies(models.Model):
-    title = models.CharField(max_length=100)
+    movie = models.CharField(max_length=100)
     
    
     def __str__(self):

@@ -7,13 +7,15 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView,CreateAPIView
 from .serializers import UpdatewatchlistSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from movies.models import Movies,Watchlist 
+from .models import Movies,Watchlist 
 from movies import serializers
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework import status
+from django_filters.rest_framework import filterset
 from rest_framework.permissions import IsAuthenticated
+
+
 
 User = get_user_model()
 # Create your views here.
@@ -46,14 +48,50 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 class Movielist(ListAPIView):
      queryset = Movies.objects.all()
-    #  serializer_class=serializers.MoviesSerializer
+     serializer_class=serializers.MoviesSerializer
 
-class Watchlist(ListAPIView):
-    serializer_class=serializers.WatchlistSerializer
-    permission_classes = [IsAuthenticated]
-    def get_serializer_class(self):
+class Watchapilist(ListAPIView):
+    
+    #   def get_serializer_class(self):
+    #      if self.request.method=="GET":
+    #       if self.request.user.is_authenticated:
+    #     #    user = self.request.user
+    #        return serializers.WatchlistSerializer
+          
+    #      elif self.request.method=="GET":
+    #         return serializers.MoviesSerializer
+
+      serializer_class = serializers.WatchlistSerializer
+    #   serializer_class= serializers.MoviesSerializer
+      def get_queryset(self):
         if self.request.user.is_authenticated:
-           return Watchlist.objects.filter(user=self.request.user)
+         user = self.request.user
+         return Watchlist.objects.filter(user=user)
+        # else:
+        #  return Movies.objects.all()
+
+        # Keeping the below codes for refrences only 
+        # queryset = Watchlist.objects.all()
+        # serializer_class =serializers.WatchlistSerializer
+        # filterset_class = MoviesFilter
+        # queryset = Watchlist.objects()
+        # def get_queryset(self):
+        #  user = self.request.user
+        #  return user.watchlist_set.all()
+        # permission_classes = [IsAuthenticated]
+        # serializer_class =serializers.WatchlistSerializer
+       
+        # def get_queryset(self):
+        #   queryset = Watchlist.objects.all()
+        #   username = self.request.query_params.get('username')
+        #   if username is not None:
+        #     queryset = queryset.filter(user__username=username)
+        #     return queryset
+            
+        #     return Response(serializer.data)
+    # def get_serializer_class(self):
+    #     if self.request.user.is_authenticated:
+    #        return Watchlist.objects.filter(user=self.request.user)
            
         # return  serializers.MoviesSerializer
 

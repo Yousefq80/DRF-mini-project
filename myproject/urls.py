@@ -22,7 +22,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # path("login/",views.UserLoginAPIView.as_view(), name="login" ),
     path("movielist/",views.Movielist.as_view(), name="movies-list"),
-    path("watchlist/",views.Watchlist.as_view(), name="movies-list"),
+    path("watchlist/",views.Watchapilist.as_view(), name="watch-list"),
     path("addingwatchlist/",views.addingwatchlist.as_view(), name="addingwatch"),
     path('api/login/', views.MyTokenObtainPairView.as_view(), name='token_obtain'),
     path('api/register/',views.RegisterAPIView.as_view(),name= 'register'),

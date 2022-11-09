@@ -73,7 +73,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MoviesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movies
-        fields = ["title"]
+        fields = ["movie"]
 
 class WatchlistSerializer(serializers.ModelSerializer):
     class Meta:

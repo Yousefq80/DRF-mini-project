@@ -46,29 +46,33 @@ class MyTokenObtainPairView(TokenObtainPairView):
 #         else:
 #             return Response(serializer.errors, HTTP_400_BAD_REQUEST)
 
-class Movielist(ListAPIView):
+class Movieapilist(ListAPIView):
      queryset = Movies.objects.all()
      serializer_class=serializers.MoviesSerializer
 
 class Watchapilist(ListAPIView):
-    
-    #   def get_serializer_class(self):
-    #      if self.request.method=="GET":
-    #       if self.request.user.is_authenticated:
-    #     #    user = self.request.user
-    #        return serializers.WatchlistSerializer
+     serializer_class = serializers.WatchlistSerializer
+    #  serializer_class =serializers.MoviesSerializer
+     
+    #  def get_serializer_class(self):
+        
           
-    #      elif self.request.method=="GET":
-    #         return serializers.MoviesSerializer
+        #   
 
-      serializer_class = serializers.WatchlistSerializer
+        # serializer_class = serializers.WatchlistSerializer
     #   serializer_class= serializers.MoviesSerializer
-      def get_queryset(self):
+     def get_queryset(self):
         if self.request.user.is_authenticated:
-         user = self.request.user
-         return Watchlist.objects.filter(user=user)
-        # else:
-        #  return Movies.objects.all()
+           user = self.request.user
+           return Watchlist.objects.filter(user=user)
+        # return Movies.objects.select_related('movielist').all()
+            # details = Movies.movie.movielist.filter(
+            # user=self.request.user)
+        #  user = self.request.user
+        #  return Watchlist.objects.filter(user=user)
+        # else: 
+          
+        #  return 
 
         # Keeping the below codes for refrences only 
         # queryset = Watchlist.objects.all()

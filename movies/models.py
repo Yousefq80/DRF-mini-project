@@ -14,7 +14,7 @@ class Watchlist(models.Model):
     
     watched= models.BooleanField()
     movie = models.ManyToManyField(
-        Movies, related_name="movies")
+        Movies, related_name="movielist")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userwatch")
 
     def __str__(self):

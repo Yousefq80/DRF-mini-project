@@ -68,17 +68,18 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # ...
 
         return token
-
-
-class MoviesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Movies
-        fields = ["movie"]
-
 class WatchlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Watchlist
         fields = ["user","movie","watched"]
+
+class MoviesSerializer(serializers.ModelSerializer):
+    movielist = WatchlistSerializer(many=True)
+    class Meta:
+        model = Movies
+        fields = ["movie"]
+
+
 
 class UpdatewatchlistSerializer(serializers.ModelSerializer):
     class Meta:

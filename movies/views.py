@@ -51,28 +51,20 @@ class Movieapilist(ListAPIView):
      serializer_class=serializers.MoviesSerializer
 
 class Watchapilist(ListAPIView):
-     serializer_class = serializers.WatchlistSerializer
-    #  serializer_class =serializers.MoviesSerializer
+    
      
-    #  def get_serializer_class(self):
-        
+     def get_serializer_class(self):
+        if self.request.user.is_authenticated:
+           return serializers.WatchlistSerializer
+        return serializers.MoviesSerializer
           
-        #   
-
-        # serializer_class = serializers.WatchlistSerializer
-    #   serializer_class= serializers.MoviesSerializer
+        
      def get_queryset(self):
         if self.request.user.is_authenticated:
            user = self.request.user
            return Watchlist.objects.filter(user=user)
-        # return Movies.objects.select_related('movielist').all()
-            # details = Movies.movie.movielist.filter(
-            # user=self.request.user)
-        #  user = self.request.user
-        #  return Watchlist.objects.filter(user=user)
-        # else: 
+        return Movies.objects.all()
           
-        #  return 
 
         # Keeping the below codes for refrences only 
         # queryset = Watchlist.objects.all()

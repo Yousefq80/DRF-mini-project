@@ -74,7 +74,7 @@ class WatchlistSerializer(serializers.ModelSerializer):
         fields = ["user","movie","watched"]
 
 class MoviesSerializer(serializers.ModelSerializer):
-    movielist = WatchlistSerializer(many=True)
+    # movielist = WatchlistSerializer(many=True)
     class Meta:
         model = Movies
         fields = ["movie"]
